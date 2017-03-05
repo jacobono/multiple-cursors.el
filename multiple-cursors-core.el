@@ -838,7 +838,7 @@ for running commands with multiple cursors."
 (defun mc/evil-read-key-advice (orig-fun &optional prompt)
   (if mc--executing-command-for-fake-cursor
       mc--evil-key-read-results
-    (let ((res (apply orig-fun prompt)))
+    (let ((res (funcall orig-fun prompt)))
       (setq mc--evil-key-read-results res)
       res)))
 
