@@ -1,0 +1,8 @@
+fest
+fest
+
+;; good buffer undo list in scratch buffer
+(nil (apply activate-cursor-for-undo 51) nil (8 . 9) 7 nil (apply deactivate-cursor-after-undo 51) nil (2 . 3) 1 nil undo-tree-canary)
+;; bad buffer undo list in tests see (8 . 9) 1 when it should be (8 . 9) 7
+;; also notice the nil boundaries for the good -- there is 4, here there is only 3
+((apply activate-cursor-for-undo 5) nil (8 . 9) 1 (apply deactivate-cursor-after-undo 5) nil (2 . 3) 1 nil undo-tree-canary)
