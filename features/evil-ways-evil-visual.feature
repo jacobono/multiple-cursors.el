@@ -72,7 +72,6 @@ Feature: Visual region
     This is a This 
     """
 
- @pr-bugs @failing @delete-backwards
  Scenario: Delete backwards from visual state
     When I replace the buffer text with:
     """
@@ -80,9 +79,7 @@ Feature: Visual region
     test
     """
     And I press "C->"
-    And I press "e"
-    And I press "v2h"
-    And I press "x"
+    And I press "ev2hx"
     Then I should see exactly:
     """
     t
