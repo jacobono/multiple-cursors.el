@@ -96,9 +96,8 @@ Feature: Visual region
     """
     And I press "C->"
     And I press "v2l"
-    And I press "C-g"
-    And I press "gv"
-    And I press "x"
+    And I press "<escape>"
+    And I press "gvx"
     Then I should see exactly:
     """
     t
