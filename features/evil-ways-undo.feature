@@ -32,3 +32,29 @@ Feature: Evil Undo
     est
     est
     """
+
+  @visual-undo @failing
+  Scenario: Remove a character from visual state and undo
+    When I replace the buffer text with:
+    """
+    test
+    test
+    """
+    And I press "C->"
+    And I press "vlxu"
+    Then I should see exactly:
+    """
+    test
+    test
+    """
+    Then The cursors should have these properties:
+      | type        | id  | point | mark | evil-state |
+      | main-cursor | nil |     2 |    2 | normal     |
+      | fake-cursor | 3   |     6 |    7 | normal     |
+      # should be fake cursor at (7,7) not sure that is possible here due to the undo implementation
+    And I press "x"
+    Then I should see exactly:
+    """
+    tst
+    tst
+    """
