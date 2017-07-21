@@ -40,20 +40,10 @@
 - the command is a motion
 - the command is a text-object motion that operates on an active region (evil interactive code `<v>'
 - point and mark don't line up with the current `evil-visual-*' variables"
-  (when (and (mc/evil-p) (evil-visual-state-p)
-             (not (= evil-visual-beginning (min (point) (mark)))))
-    (cond
-     ((and mc--executing-command-for-fake-cursor
-           (eq 'motion (evil-get-command-property this-command :repeat))
-           (evil-get-command-property this-command :extend-selection))
-      (evil-visual-refresh (mark) (point)))
-     (t
-      (evil-visual-refresh (mark) (point)))))
-  (when (mc/evil-p)
-    (cond
-     ((and (eq 'motion (evil-get-command-property this-command :repeat))
-           (evil-get-command-property this-command :keep-visual))
-      (evil-visual-refresh (mark) (point))))))
+  (when (and (mc/evil-p)
+             (eq 'motion (evil-get-command-property this-command :repeat))
+             (evil-get-command-property this-command :keep-visual))
+    (evil-visual-refresh (mark) (point))))
 
 (defun mc/overlay-change-evil-state-p (o)
   "Is the current evil-state variable equal to the state stored
